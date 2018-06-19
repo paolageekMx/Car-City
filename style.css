@@ -1,0 +1,14 @@
+body {
+  background-color: rgb(30,144,255);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: -10;
+}
+
+.cielo {
+  border-radius: .4em;
+}
+
