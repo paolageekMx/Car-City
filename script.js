@@ -21,6 +21,7 @@ var ground = new Ground();
 var road = new Road();
 var jeep = new Jeep();
 var menos =0;
+var score = 0;
 startGame();
 
 //CONSTRUCTORES
@@ -197,7 +198,7 @@ function Jeep() {
   this.width = 150;
   this.img = new Image();
   this.img.src = "images/Jeep.gif";
-  
+  this.gasolina =0;
   
   this.img.onload = function() {
     this.draw();
@@ -238,11 +239,15 @@ function Jeep() {
   };
 
   this.drawScore = function() {
-    this.gasolina = Math.floor(frames/60);
+    if(frames%60===0){
+      score++;
+    }
     ctx2.font = "50px Avenir";
     ctx2.fillStyle = "black";
-    ctx2.fillText(this.gasolina, 1100, this.y+50);
+    ctx2.fillText("Litros   "+score, 1050, this.y+50);
+    
   }
+ 
 }
 
 function generateLine() {
@@ -363,9 +368,8 @@ function norm(value, min, max) {
 
 function checkCollition() {
   baches.forEach(function(bache) {
-    if (jeep.IsTouching(bache)){
-      jeep.gasolina = jeep.gasolina - 10;
-      
+    if (jeep.IsTouching(bache)){ 
+      score -= 0.5;
     }
   
   });
@@ -409,6 +413,7 @@ function update() {
 
 function update2() {}
 function startGame() {
+    road.sound.play();
   
   if (intervalo > 0) return;
   intervalo = setInterval(function() {
@@ -420,6 +425,6 @@ function startGame() {
   intervalo2 = setInterval(function() {
     //city();
   }, 1000 / 60);
-  road.sound.play();
+  
 
 }
